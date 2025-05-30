@@ -11,7 +11,10 @@ load_dotenv()
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
-API_KEY = os.getenv('CLIPDROP_API_KEY', 'b08e190eced2606342e3f5007f916e14330008642db7485b9a95fe9a1d7b8c7ca6d475be18b8a1285a3154a6b80f29bc')
+# Get API key from environment variables
+API_KEY = os.getenv('CLIPDROP_API_KEY')
+if not API_KEY:
+    raise ValueError("CLIPDROP_API_KEY environment variable is not set")
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
